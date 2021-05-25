@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head></h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80">
+
+			<h:outputText value="Bienvenue dans notre application" />
+
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="100">
+			<h:outputText value="Copyright 2021." />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200"
+			style="width:200;border-width:1px;">
+		</p:layoutUnit>
+		<p:layoutUnit position="east" size="200"
+			style="width:200;border-width:1px;">
+		<ui:include src="/menu.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center" style="width:200; border-width:0px;">
+		
+		<h:form>
+		<p:growl showDetail="true"></p:growl>
+		<p:dataTable value="#{reservationMBean.listeRes}" var="res" selection="#{reservationMBean.selectedRes}" selectionMode="single" rowKey="#{res.idreservation}">
+		
+		<p:column headerText="Id">
+		<h:outputText value="#{res.idreservation}" />
+		</p:column>
+		
+		<p:column headerText="Date reservation">
+		<h:outputText value="#{res.dateReservation}" />
+		</p:column>
+		
+		<p:column headerText="Date arrivée">
+		<h:outputText value="#{res.dateArrivee}" />
+		</p:column>
+		
+		<p:column headerText="Date depart">
+		<h:outputText value="#{res.dateDepart}" />
+		</p:column>
+		
+		<p:column headerText="Nombre de personne">
+		<h:outputText value="#{res.nbPersonnes}" />
+		</p:column>
+		
+		<p:column headerText="Nombre de nuit">
+		<h:outputText value="#{res.nbrenuites}" />
+		</p:column>
+		
+		<p:column headerText="Type de pension">
+		<h:outputText value="#{res.typePension}" />
+		</p:column>
+		
+		<p:column headerText="Client">
+		<h:outputText value="#{res.client.nom}" />
+		</p:column>
+		
+		<p:column headerText="Hotel">
+		<h:outputText value="#{res.hotel.nomHotel}" />
+		</p:column>
+		
+		<p:column headerText="Supprimer">
+		<p:commandButton actionListener="#{reservationMBean.deleteReservation}" value="supp" />
+		</p:column>
+		
+		<p:column headerText="Editer">
+		<p:commandButton value="Edit" actionListener="#{reservationMBean.editReservation}" oncomplete="PF('dlgUpdate').show()"/>
+		</p:column>
+		
+		</p:dataTable>
+		</h:form>
+		<h:form id="myform">
+		<p:dialog id="dlgUpdate" widgetVar="dlgUpdate">
+		<p:panelGrid columns="2" id="panel">
+					
+					<h:outputText value="Date de reservation"></h:outputText>
+					<p:calendar value="#{reservationMBean.selectedRes.dateReservation}" />
+
+					<h:outputText value="Date d'arrivée"></h:outputText>
+					<p:calendar value="#{reservationMBean.selectedRes.dateArrivee}" />
+
+					<h:outputText value="Date de depart"></h:outputText>
+					<p:calendar value="#{reservationMBean.selectedRes.dateDepart}" />
+					
+					<h:outputText value="Client"></h:outputText>
+					<p:selectOneMenu value="#{reservationMBean.selectedRes.client.id}">
+					<f:selectItems value="#{clientMBean.listClient}" var="clt" itemLabel="#{clt.nom}" itemValue="#{clt.id}"/>
+					</p:selectOneMenu>
+					
+					<h:outputText value="Hotel"></h:outputText>
+					<p:selectOneMenu value="#{reservationMBean.selectedRes.hotel.idhotel}">
+					<f:selectItems value="#{hotelMBean.listHotel}" var="hlt" itemLabel="#{hlt.nomHotel}" itemValue="#{hlt.idhotel}"/>
+					</p:selectOneMenu>
+
+					<h:outputText value="Nombre personne"></h:outputText>
+					<p:inputText value="#{reservationMBean.selectedRes.nbPersonnes}"></p:inputText>
+					
+					<h:outputText value="Nombre nuit"></h:outputText>
+					<p:inputText value="#{reservationMBean.selectedRes.nbrenuites}"></p:inputText>
+					
+					<h:outputText value="Type pension"></h:outputText>
+					<p:inputText value="#{reservationMBean.selectedRes.typePension}"></p:inputText>
+					
+					<h:commandButton value="Modifier"
+						actionListener="#{reservationMBean.updateReservation}"></h:commandButton>
+				</p:panelGrid>
+		</p:dialog>
+		</h:form>
+		</p:layoutUnit>
+	</p:layout>
+
+
+</h:body>
+
+</html>

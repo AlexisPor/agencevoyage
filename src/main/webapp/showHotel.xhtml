@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head></h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80">
+
+			<h:outputText value="Bienvenue dans notre application" />
+
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="100">
+			<h:outputText value="Copyright 2021." />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200"
+			style="width:200;border-width:1px;">
+		</p:layoutUnit>
+		<p:layoutUnit position="east" size="200"
+			style="width:200;border-width:1px;">
+		<ui:include src="/menu.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center" style="width:200; border-width:0px;">
+		
+		<h:form>
+		<p:growl showDetail="true"></p:growl>
+		<p:dataTable value="#{hotelMBean.listHotel}" var="hotel" selection="#{hotelMBean.selectedHotel}" selectionMode="single" rowKey="#{hotel.idhotel}">
+		
+		<p:column headerText="Id">
+		<h:outputText value="#{hotel.idhotel}" />
+		</p:column>
+		
+		<p:column headerText="Nom">
+		<h:outputText value="#{hotel.nomHotel}" />
+		</p:column>
+		
+		<p:column headerText="Adresse">
+		<h:outputText value="#{hotel.adresseHotel}" />
+		</p:column>
+		
+		<p:column headerText="Nombre d'étoile">
+		<h:outputText value="#{hotel.nbreetoile}" />
+		</p:column>
+		
+		<p:column headerText="Nombre de chambre">
+		<h:outputText value="#{hotel.nbrechambre}" />
+		</p:column>
+		
+		<p:column headerText="Supprimer">
+		<h:commandButton actionListener="#{hotelMBean.deleteHotel}" value="supp" />
+		</p:column>
+		
+		<p:column headerText="Editer">
+		<h:commandButton action="#{hotelMBean.editHotel}" value="Edit" />
+		</p:column>
+		
+		</p:dataTable>
+		</h:form>
+		</p:layoutUnit>
+	</p:layout>
+
+
+</h:body>
+
+</html>

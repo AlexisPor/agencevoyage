@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head></h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80">
+
+			<h:outputText value="Bienvenue dans notre application" />
+
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="100">
+			<h:outputText value="Copyright 2021." />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200"
+			style="width:200;border-width:1px;">
+		</p:layoutUnit>
+		<p:layoutUnit position="east" size="200"
+			style="width:200;border-width:1px;">
+		<ui:include src="/menu.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center" style="width:200; border-width:0px;">
+
+			<h:form>
+				<p:growl showDetail="true"></p:growl>
+				<p:panelGrid columns="2">
+					<h:outputText value="Id client"></h:outputText>
+					<p:inputText value="#{ clientMBean.client.id }"></p:inputText>
+
+					<h:outputText value="Nom client"></h:outputText>
+					<p:inputText value="#{ clientMBean.client.nom }"></p:inputText>
+
+					<h:outputText value="Prenom client"></h:outputText>
+					<p:inputText value="#{ clientMBean.client.prenom }"></p:inputText>
+
+					<h:outputText value="Adresse client"></h:outputText>
+					<p:inputText value="#{ clientMBean.client.adresse }"></p:inputText>
+
+					<h:outputText value="Sexe client"></h:outputText>
+					<p:inputText value="#{ clientMBean.client.sexe }"></p:inputText>
+
+					<p:commandButton value="Ajouter"
+						actionListener="#{ clientMBean.addClient }"></p:commandButton>
+				</p:panelGrid>
+			</h:form>
+
+
+		</p:layoutUnit>
+	</p:layout>
+
+
+</h:body>
+
+</html>

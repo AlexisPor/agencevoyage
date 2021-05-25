@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head></h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80">
+
+			<h:outputText value="Bienvenue dans notre application" />
+
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="100">
+			<h:outputText value="Copyright 2021." />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200"
+			style="width:200;border-width:1px;">
+		</p:layoutUnit>
+		<p:layoutUnit position="east" size="200"
+			style="width:200;border-width:1px;">
+		<ui:include src="/menu.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center" style="width:200; border-width:0px;">
+
+			<h:form>
+				<p:growl showDetail="true"></p:growl>
+				<p:panelGrid columns="2">
+					
+					<h:outputText value="Date de reservation"></h:outputText>
+					<p:calendar value="#{reservationMBean.res.dateReservation}" />
+
+					<h:outputText value="Date d'arrivée"></h:outputText>
+					<p:calendar value="#{reservationMBean.res.dateArrivee}" />
+
+					<h:outputText value="Date de depart"></h:outputText>
+					<p:calendar value="#{reservationMBean.res.dateDepart}" />
+					
+					<h:outputText value="Client"></h:outputText>
+					<p:selectOneMenu value="#{reservationMBean.res.client.id}">
+					<f:selectItems value="#{clientMBean.listClient}" var="clt" itemLabel="#{clt.nom}" itemValue="#{clt.id}"/>
+					</p:selectOneMenu>
+					
+					<h:outputText value="Hotel"></h:outputText>
+					<p:selectOneMenu value="#{reservationMBean.res.hotel.idhotel}">
+					<f:selectItems value="#{hotelMBean.listHotel}" var="hlt" itemLabel="#{hlt.nomHotel}" itemValue="#{hlt.idhotel}"/>
+					</p:selectOneMenu>
+
+					<h:outputText value="Nombre personne"></h:outputText>
+					<p:inputText value="#{reservationMBean.res.nbPersonnes}"></p:inputText>
+					
+					<h:outputText value="Nombre nuit"></h:outputText>
+					<p:inputText value="#{reservationMBean.res.nbrenuites}"></p:inputText>
+					
+					<h:outputText value="Type pension"></h:outputText>
+					<p:inputText value="#{reservationMBean.res.typePension}"></p:inputText>
+					
+					<p:commandButton value="Ajouter"
+						actionListener="#{reservationMBean.addReservation}"></p:commandButton>
+				</p:panelGrid>
+			</h:form>
+
+
+		</p:layoutUnit>
+	</p:layout>
+
+
+</h:body>
+
+</html>

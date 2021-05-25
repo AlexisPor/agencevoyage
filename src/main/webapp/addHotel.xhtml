@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<body> 
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80">
+
+			<h:outputText value="Bienvenue dans notre application" />
+
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="100">
+			<h:outputText value="Copyright 2021." />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="200"
+			style="width:200;border-width:1px;">
+		</p:layoutUnit>
+		<p:layoutUnit position="east" size="200"
+			style="width:200;border-width:1px;">
+		<ui:include src="/menu.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center" style="width:200; border-width:0px;">
+
+			<h:form>
+				<p:growl showDetail="true"></p:growl>
+				<p:panelGrid columns="2">
+					<h:outputText value="Id hotel"></h:outputText>
+					<p:inputText value="#{ hotelMBean.hotel.idhotel }"></p:inputText>
+
+					<h:outputText value="Nom hotel"></h:outputText>
+					<p:inputText value="#{ hotelMBean.hotel.nomHotel }"></p:inputText>
+
+					<h:outputText value="Adresse hotel"></h:outputText>
+					<p:inputText value="#{ hotelMBean.hotel.adresseHotel }"></p:inputText>
+
+					<h:outputText value="Nombre d'étoile "></h:outputText>
+					<p:inputText value="#{ hotelMBean.hotel.nbreetoile }"></p:inputText>
+
+					<h:outputText value="Nombre de chambre"></h:outputText>
+					<p:inputText value="#{ hotelMBean.hotel.nbrechambre }"></p:inputText>
+
+					<p:commandButton value="Ajouter"
+						actionListener="#{ hotelMBean.addHotel }"></p:commandButton>
+				</p:panelGrid>
+			</h:form>
+
+
+		</p:layoutUnit>
+	</p:layout>
+</body> 
+</html>
